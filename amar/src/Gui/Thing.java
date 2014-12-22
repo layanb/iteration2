@@ -336,7 +336,7 @@ public class Thing extends PApplet {
 		background = loadImage(icon.toString()); 
 		 
 		 */
-		
+		layan
 		
 	}
 
