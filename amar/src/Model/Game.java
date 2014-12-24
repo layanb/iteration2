@@ -99,8 +99,9 @@ public class Game implements buttonInterface {
 		}
 	}
 
-	public int getScore() {
-		return score;
+	public String getScore() {
+		Integer x=  score;
+		return x.toString();
 	}
 
 	public void setScore(int score) {

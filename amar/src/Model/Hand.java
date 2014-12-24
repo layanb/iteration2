@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Hand {
 
-	private int sum;
+	private  int sum;
 	private List<String> cards;
     public Hand() {
      this.sum = 0;
@@ -14,6 +14,7 @@ public class Hand {
 	public int getSum() {
 		return sum;
 	}
+
 
 	public void setSum(int sum) {
 		 this.sum+=sum;
