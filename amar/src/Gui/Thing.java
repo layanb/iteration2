@@ -482,7 +482,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**Dealer Busted** \n   You win!");
 				check = 1;
-				delay(1000);
+				
 				reset();
 				return;
 			}
@@ -497,7 +497,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**Bad luck** \n   Delaer win!");
 				check = 1;
-				delay(1000);
+				
 				reset();
 				return;
 			}
@@ -510,7 +510,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**congratulations** \n   you win!");
 				check = 1;
-				delay(1000);
+				
 				reset();
 				return;
 			}
@@ -523,7 +523,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**unlucky** \n  ! ! Draw The dealer win !!");
 				check = 1;
-				delay(1000);
+				
 				reset();
 				return;
 			}

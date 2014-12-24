@@ -9,12 +9,12 @@ public class Game implements buttonInterface {
 	private int score;
 	private int round;
 	private Deck deck = new Deck();
-	private Hand playerHand;
-	private Hand dealerHand;
+	private Hand playerHand=new Hand();
+	private Hand dealerHand=new Hand();
 	private int deckIndex = 0;
 	private int flag;
 	
-	public void shuffle() {
+	public void shuffle(Deck deck) {
 		Random rnd = new Random();
 		for (int i = deck.getDeck().size() - 1; i > 0; i--) {
 			int index = rnd.nextInt(i + 1);
@@ -42,19 +42,26 @@ public class Game implements buttonInterface {
 		}
 	}
 	public void updateHandDealer(int x ) {
-		if(x==1 || x==11 || x==12 || x==13){
+		if(x==11 || x==12 || x==13){
 			 dealerHand.setSum(10);
+		}
+		else if(x==1){
+			if(dealerHand.getSum()+11 >21){
+				dealerHand.setSum(1);
+			}
+			else{
+				dealerHand.setSum(11);
+			}
 		}
 		else 
 	      dealerHand.setSum(x);
 		}
 
-	@Override
 	public String[] createDealLogic() {
-		shuffle();
-		String cards[] = new String[4];
 		playerHand=new Hand();
 		dealerHand=new Hand();
+		shuffle(this.deck);
+		String cards[] = new String[4];
 		int i;
 		for (i = 0; i < 2; ++i) {
 			cards[i]=deck.getDeck().get(deckIndex);
@@ -74,7 +81,6 @@ public class Game implements buttonInterface {
 
 	}
 
-	@Override
 	public String createHitLogic() {
 		String card;
 		card = deck.getDeck().get(deckIndex);
@@ -85,9 +91,8 @@ public class Game implements buttonInterface {
      return card;
 	}
 
-	@Override
 	public void createStandLogic() {
-		// TODO Auto-generated method stub
+		
 		List<String> cards = new ArrayList<String>();
 		while(dealerHand.getSum()<17){
 			int x= Integer.parseInt(deck.getDeck().get(deckIndex).replaceAll("[\\D]", ""));
@@ -99,9 +104,8 @@ public class Game implements buttonInterface {
 		}
 	}
 
-	public String getScore() {
-		Integer x=  score;
-		return x.toString();
+	public int getScore() {
+		return score;
 	}
 
 	public void setScore(int score) {
