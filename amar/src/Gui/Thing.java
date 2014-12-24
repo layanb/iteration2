@@ -120,7 +120,7 @@ public class Thing extends PApplet {
 				if (flag == 0) {
 					flag = 1;
 					check = 0;
-					game.setdeckIndex(0);
+			//		game.setdeckIndex(0);
 				} else if ((flag1 == 0) && (flag2 == 0))
 					return;
 				else {
