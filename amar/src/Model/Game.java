@@ -59,6 +59,7 @@ public class Game implements buttonInterface {
 
 	public String[] createDealLogic() {
 		playerHand=new Hand();
+		
 		dealerHand=new Hand();
 		flag=0;
 		shuffle(this.deck);
