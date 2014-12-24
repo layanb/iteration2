@@ -34,6 +34,7 @@ public class Thing extends PApplet {
 	Game game = new Game();
 	Hand hand = new Hand();
 	Hand dhand = new Hand();
+	
 
 	public void setup() {
 
@@ -85,29 +86,29 @@ public class Thing extends PApplet {
 	}
 
 	public void draw() {
-
-		// Button round=new Button("Round:   "+game.getRound());
-		// round.setLocation(500,50);
-		// round.setBounds(500, 50,80, 50);
-		// round.setVisible(true);
-		// Color red=new Color(250,0,0);
-		// Color d=new Color(0,250,0);
-		// round.setBackground(red);
-
-		// Button score = new Button("Score:   "+game.getScore());
+		
+	//	Button round=new Button("Round:   "+game.getRound());
+	//	round.setLocation(500,50);
+	//	round.setBounds(500, 50,80, 50);
+	//	round.setVisible(true);
+	//	Color red=new Color(250,0,0);
+	//	Color d=new Color(0,250,0);
+	//	round.setBackground(red);
+		
+	//	Button score = new Button("Score:   "+game.getScore());
 		background(background);
 		Button beep = new Button("DEAL");
 		Button beep1 = new Button("HIT");
 		Button beep2 = new Button("STAND");
-		// score.setLocation(500, 100);
-		// score.setBounds(500, 100, 100, 50);
-		// score.setVisible(true);
-		// this.add(score);
+	//	score.setLocation(500, 100);
+	//	score.setBounds(500, 100, 100, 50);
+	//	score.setVisible(true);
+	//	this.add(score);
 		beep.setLocation(400, 500);
 		beep.setBounds(400, 500, 100, 50);
 		beep.setVisible(true);
-		// score.setBackground(d);
-		// this.add(round);
+	//	score.setBackground(d);
+	//	this.add(round);
 
 		/*
 		 * Deal button oop singleton :D we want the deal button to act one time
@@ -122,9 +123,9 @@ public class Thing extends PApplet {
 				} else if ((flag1 == 0) && (flag2 == 0))
 					return;
 				else {
-				
+					reset();
 					flag = 0;
-					check = 0;
+
 				}
 
 				checkdeal();
@@ -204,7 +205,6 @@ public class Thing extends PApplet {
 					dealerhand = game.getDealerHand();
 					dealercards = dealerhand.getCards();
 					if (dealercards.size() == 2) {
-
 						checkstand();
 
 					}
@@ -312,14 +312,12 @@ public class Thing extends PApplet {
 		}
 
 		if (flag2 == 1) {
-
 			image(dcard1, 250, y);
 			image(dcard4, 250 + 18, y);
 
 		}
 		if (flag2 == 2) {
-			dcard1 = loadImage(getimg(dcards[1] + ".png"));
-			dcard1.resize(80, 120);
+
 			image(dcard1, 250, y);
 			image(dcard4, 250 + 18, y);
 
@@ -355,6 +353,13 @@ public class Thing extends PApplet {
 		ImageIcon icon = new ImageIcon(imgUrl);
 
 		return icon.toString();
+		/*
+		 * URL imgUrl =
+		 * getClass().getClassLoader().getResource("pics/"+"Table.png");
+		 * ImageIcon icon = new ImageIcon(imgUrl); background =
+		 * loadImage(icon.toString());
+		 */
+
 	}
 
 	public void reset() {
@@ -414,8 +419,7 @@ public class Thing extends PApplet {
 						"**BlackJack** \n   You win!");
 				check = 1;
 				flag2 = 2;
-				delay(1000);
-				reset();
+			
 			}
 			return;
 
@@ -429,8 +433,7 @@ public class Thing extends PApplet {
 						"**BlackJack** \n   Delaer win!");
 				check = 1;
 				flag2 = 2;
-				delay(1000);
-				reset();
+			
 				return;
 			}
 		}
@@ -448,8 +451,7 @@ public class Thing extends PApplet {
 						"**BlackJack** \n   You win!");
 				check = 1;
 				flag2 = 2;
-				delay(1000);
-				reset();
+			
 				return;
 			}
 		}
@@ -463,8 +465,7 @@ public class Thing extends PApplet {
 						"**Busted** \n   You Loose!");
 				check = 1;
 				flag2 = 2;
-				delay(1000);
-				reset();
+				
 				return;
 			}
 		}
@@ -482,8 +483,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**Dealer Busted** \n   You win!");
 				check = 1;
-				delay(1000);
-				reset();
+				
 				return;
 			}
 		}
@@ -497,8 +497,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**Bad luck** \n   Delaer win!");
 				check = 1;
-				delay(1000);
-				reset();
+				
 				return;
 			}
 		}
@@ -510,8 +509,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**congratulations** \n   you win!");
 				check = 1;
-				delay(1000);
-				reset();
+				
 				return;
 			}
 		}
@@ -523,8 +521,7 @@ public class Thing extends PApplet {
 				JOptionPane.showMessageDialog(null,
 						"**unlucky** \n  ! ! Draw The dealer win !!");
 				check = 1;
-				delay(1000);
-				reset();
+				
 				return;
 			}
 		}
