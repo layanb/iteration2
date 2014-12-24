@@ -96,16 +96,16 @@ public class Thing extends PApplet {
 
 		// Button score = new Button("Score:   "+game.getScore());
 		background(background);
-		Button beep = new Button("DEAL");
-		Button beep1 = new Button("HIT");
-		Button beep2 = new Button("STAND");
+		Button deal = new Button("DEAL");
+		Button hit = new Button("HIT");
+		Button stand = new Button("STAND");
 		// score.setLocation(500, 100);
 		// score.setBounds(500, 100, 100, 50);
 		// score.setVisible(true);
 		// this.add(score);
-		beep.setLocation(400, 500);
-		beep.setBounds(400, 500, 100, 50);
-		beep.setVisible(true);
+		deal.setLocation(400, 500);
+		deal.setBounds(400, 500, 100, 50);
+		deal.setVisible(true);
 		// score.setBackground(d);
 		// this.add(round);
 
@@ -113,13 +113,13 @@ public class Thing extends PApplet {
 		 * Deal button oop singleton :D we want the deal button to act one time
 		 * so we change his value to be 1
 		 */
-		beep.addMouseListener(new MouseAdapter() {
+		deal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (flag == 0) {
 					flag = 1;
 					check = 0;
-					// game.setdeckIndex(0);
+					
 				} else if ((flag1 == 0) && (flag2 == 0))
 					return;
 				else {
@@ -133,18 +133,18 @@ public class Thing extends PApplet {
 			}
 		});
 
-		this.add(beep);
+		this.add(deal);
 
-		beep1.setLocation(400, 500);
-		beep1.setBounds(200, 500, 100, 50);
-		beep1.setVisible(true);
+		hit.setLocation(400, 500);
+		hit.setBounds(200, 500, 100, 50);
+		hit.setVisible(true);
 		/*
 		 * HIT Button we claimed that the player will have no more than 4 cards
 		 * in his hand before he exceed the 21 and we added the flags from the
 		 * deal button and the stand to make the button disabled after stand and
 		 * enable after deal
 		 */
-		beep1.addMouseListener(new MouseAdapter() {
+		hit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (game.getPlayerHand().getSum() > 21)
@@ -178,9 +178,9 @@ public class Thing extends PApplet {
 				}
 			}
 		});
-		beep2.setLocation(400, 500);
-		beep2.setBounds(300, 500, 100, 50);
-		beep2.setVisible(true);
+		stand.setLocation(400, 500);
+		stand.setBounds(300, 500, 100, 50);
+		stand.setVisible(true);
 		/**
 		 * Stand button function call the stand function and check how many
 		 * cards the dealer have and fill the cards
@@ -188,7 +188,7 @@ public class Thing extends PApplet {
 		 * 
 		 * */
 
-		beep2.addMouseListener(new MouseAdapter() {
+		stand.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (flag == 0)
@@ -206,6 +206,7 @@ public class Thing extends PApplet {
 					dealercards = dealerhand.getCards();
 					if (dealercards.size() == 2) {
 						checkstand();
+						flag2=2;
 
 					}
 					if (dealercards.size() == 3) {
@@ -243,12 +244,12 @@ public class Thing extends PApplet {
 
 			}
 		});
-		this.add(beep2);
+		this.add(stand);
 
 		if (flag == 1) {
-			this.remove(beep);
+			this.remove(deal);
 		}
-		this.add(beep1);
+		this.add(hit);
 
 		image(deck2, 440, 280);
 
@@ -317,7 +318,8 @@ public class Thing extends PApplet {
 
 		}
 		if (flag2 == 2) {
-
+			dcard1 = loadImage(getimg(dcards[1] + ".png"));
+			dcard1.resize(80, 120);
 			image(dcard1, 250, y);
 			image(dcard4, 250 + 18, y);
 
