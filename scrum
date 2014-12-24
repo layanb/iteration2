@@ -4,3 +4,26 @@ I made it to work for more than one round but the backend doesn’t support that
 but the score will not change ,also the game will go slow after some time(I don’t know why) 
 and sometimes the messages doesn’t pop upand we will fix this and add the score and round in the next iteration.
 
+Layan Baransi: 204666861
+In this homework me and Rana  we was a QA.
+I write tests for every function that the backend developer write and tell them if I found bugs or problems in the code.
+I didn't write test for the createDealLogic and createStandLogic function because they have the same code of createHitLogic
+function.
+
+Kholod Khatib: 311538417
+Backend: This week I have changing some logic in Shuffle and UpdateHandDealer function,
+In addition I worked on Declaring the winner for the round.
+
+Rana higaze 311154231
+In this week me and Layan we was a QA we work together Layan started to wrote testing for every function and I set beside
+her and searches about bugs , problem  in the code .
+
+Dona Nassar 204530745
+I am the team leader, in this week we complete our implementation for the second iteration and writing the tests for the
+methods in the model package.
+In this iteration we have a whole round in the game that works! All the buttons(deal , hit and stand) are working and 
+declaring the winner. 
+Next iteration we’ll have a whole game with more than one round.
+
+
+
