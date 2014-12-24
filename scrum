@@ -1,0 +1,6 @@
+Krayem Ammar 2011524336
+I continue to work adding the winners declaration and stop the game if one of the players had been busted,
+I made it to work for more than one round but the backend doesn’t support that so the deal button will restart the game
+but the score will not change ,also the game will go slow after some time(I don’t know why) 
+and sometimes the messages doesn’t pop upand we will fix this and add the score and round in the next iteration.
+
