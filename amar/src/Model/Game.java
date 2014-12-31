@@ -6,13 +6,14 @@ import java.util.Random;
 
 public class Game implements buttonInterface {
 
-	private int score;
-	private int round;
+	private int score=100;
+	private static int round=0;
 	private Deck deck = new Deck();
 	private Hand playerHand=new Hand();
 	private Hand dealerHand=new Hand();
 	private int deckIndex = 0;
 	private int flag=0;
+	private int value;
 	
 	public void shuffle(Deck deck) {
 		Random rnd = new Random();
@@ -70,15 +71,16 @@ public class Game implements buttonInterface {
 			playerHand.setCards(cards[i]);
 			int x= Integer.parseInt(deck.getDeck().get(deckIndex).replaceAll("[\\D]", ""));
 			updateHandPlayer(x);
-			deckIndex++;
+			setdeckIndex(deckIndex+1);
 		}
 		for (i = 2; i < 4; ++i) {
 			cards[i]=deck.getDeck().get(deckIndex);
 			dealerHand.setCards(cards[i]);
 			int x= Integer.parseInt(deck.getDeck().get(deckIndex).replaceAll("[\\D]", ""));
 			updateHandDealer(x);
-			deckIndex++;
+			setdeckIndex(deckIndex+1);
 		}
+		setRound(round+1);
 		return cards;
 
 	}
@@ -89,7 +91,7 @@ public class Game implements buttonInterface {
 		int x= Integer.parseInt(deck.getDeck().get(deckIndex).replaceAll("[\\D]", ""));
 		updateHandPlayer(x);
 		playerHand.setCards(card);
-		deckIndex++;
+		setdeckIndex(deckIndex+1);
      return card;
 	}
 
@@ -102,7 +104,7 @@ public class Game implements buttonInterface {
 			String card=deck.getDeck().get(deckIndex);
 			cards.add(card);
 			dealerHand.setCards(card);
-			deckIndex++;
+			setdeckIndex(deckIndex+1);
 		}
 	}
 
@@ -166,6 +168,7 @@ public class Game implements buttonInterface {
 	public void setDealerHand(Hand dealerHand) {
 		this.dealerHand = dealerHand;
 	}
+	
 	public void setdeckIndex(int x)
 	{ 
 		if(x>=0)
@@ -173,5 +176,44 @@ public class Game implements buttonInterface {
 		this.deckIndex=x;
 			else x=0;
 	}
+	
+	/**
+	 * @return the value
+	 */
+	public int getValue() {
+		return value;
+	}
 
+	/**
+	 * @param value the value to set
+	 */
+	public void setValue(int value) {
+		this.value = value;
+	}
+
+	public void calculateScore(String winner){
+		if(round%2==0){
+			if(winner == "p"){
+				setScore(value*3);
+			}
+			else{
+				if(winner == "d"){
+					setScore(-value*3);
+				}
+			}
+		}
+		else{
+			if(round%2==1){
+				if(winner == "p"){
+					setScore(value*2);
+				}
+				else{
+					if(winner == "d"){
+						setScore(-value*2);
+					}
+				}
+			}
+		}
+	}
+	
 }

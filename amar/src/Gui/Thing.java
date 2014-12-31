@@ -1,14 +1,17 @@
 package Gui;
 
 import java.awt.Button;
+import java.awt.Color;
 //import java.awt.Color;
 import java.awt.Image;
+import java.awt.Label;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import Model.*;
@@ -34,9 +37,12 @@ public class Thing extends PApplet {
 	Game game = new Game();
 	Hand hand = new Hand();
 	Hand dhand = new Hand();
-
+	Label labe=new Label("Round:");
+	
 	public void setup() {
-
+		 Button score = new Button("Score:   "+game.getScore());  
+		 Button round=new Button("Round:   "+game.getRound());
+		labe.setBounds(10, 32, 46, 14);
 		size(600, 600);
 		f = x = x1 = 440;
 		y = y1 = 280;
@@ -51,7 +57,7 @@ public class Thing extends PApplet {
 		pcards[1] = cards[1];
 		dcards[0] = cards[2];
 		dcards[1] = cards[3];
-
+      
 		background = loadImage(getimg("Table.png"));
 		background.resize(600, 600);
 
@@ -86,28 +92,30 @@ public class Thing extends PApplet {
 
 	public void draw() {
 
-		// Button round=new Button("Round:   "+game.getRound());
-		// round.setLocation(500,50);
-		// round.setBounds(500, 50,80, 50);
-		// round.setVisible(true);
-		// Color red=new Color(250,0,0);
-		// Color d=new Color(0,250,0);
-		// round.setBackground(red);
-
-		// Button score = new Button("Score:   "+game.getScore());
+		
+		round.setLocation(500,50);
+		 round.setBounds(500, 50,80, 50);
+		round.setVisible(true);
+		 Color red=new Color(250,0,0);
+		Color d=new Color(0,250,0);
+		round.setBackground(red);
+//this.add(labe);
+		
+		
+		
 		background(background);
 		Button deal = new Button("DEAL");
 		Button hit = new Button("HIT");
 		Button stand = new Button("STAND");
-		// score.setLocation(500, 100);
-		// score.setBounds(500, 100, 100, 50);
-		// score.setVisible(true);
-		// this.add(score);
+		 score.setLocation(500, 100);
+		 score.setBounds(500, 100, 100, 50);
+		 score.setVisible(true);
+		 this.add(score);
 		deal.setLocation(400, 500);
 		deal.setBounds(400, 500, 100, 50);
 		deal.setVisible(true);
-		// score.setBackground(d);
-		// this.add(round);
+		score.setBackground(d);
+		 this.add(round);
 
 		/*
 		 * Deal button oop singleton :D we want the deal button to act one time
@@ -129,8 +137,9 @@ public class Thing extends PApplet {
 				}
 
 				checkdeal();
+			
 
-			}
+		}
 		});
 
 		this.add(deal);
@@ -419,6 +428,8 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**BlackJack** \n   You win!");
+					game.calculateScore("p");
+			
 				check = 1;
 				flag2 = 2;
 
@@ -433,6 +444,7 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**BlackJack** \n   Delaer win!");
+				game.calculateScore("d");
 				check = 1;
 				flag2 = 2;
 
@@ -451,6 +463,7 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**BlackJack** \n   You win!");
+				game.calculateScore("p");
 				check = 1;
 				flag2 = 2;
 
@@ -465,6 +478,7 @@ public class Thing extends PApplet {
 
 				JOptionPane.showMessageDialog(null,
 						"**Busted** \n   You Loose!");
+				game.calculateScore("d");
 				check = 1;
 				flag2 = 2;
 
@@ -484,6 +498,7 @@ public class Thing extends PApplet {
 
 				JOptionPane.showMessageDialog(null,
 						"**Dealer Busted** \n   You win!");
+				game.calculateScore("p");
 				check = 1;
 
 				return;
@@ -498,6 +513,7 @@ public class Thing extends PApplet {
 
 				JOptionPane.showMessageDialog(null,
 						"**Bad luck** \n   Delaer win!");
+				game.calculateScore("d");
 				check = 1;
 
 				return;
@@ -510,6 +526,7 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**congratulations** \n   you win!");
+				game.calculateScore("p");
 				check = 1;
 
 				return;
@@ -522,6 +539,7 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**unlucky** \n  ! ! Draw The dealer win !!");
+				game.calculateScore("d");
 				check = 1;
 
 				return;
@@ -533,6 +551,7 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**BlackJack** \n   Delaer win!");
+				game.calculateScore("d");
 				check = 1;
 				
 
