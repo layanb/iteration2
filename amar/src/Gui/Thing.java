@@ -1,8 +1,8 @@
 package Gui;
 
 import java.awt.Button;
-//import java.awt.Color;
-import java.awt.Image;
+import java.awt.Color;
+import java.awt.Label;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -29,13 +29,13 @@ public class Thing extends PApplet {
 	int x, y, w, h, z, f, y1, z1, w1, h1, x1;
 	int xspeed, yspeed, zspeed, x1speed, x2speed;
 	PImage background, deck, deck2, dcard1, dcard3, dcard4, deck4;
-	Image amar;
 	PImage pcard1, pcard2, pcard5, pcard6, deck5, dcard5, dcard6, dcard7;
 	Game game = new Game();
 	Hand hand = new Hand();
 	Hand dhand = new Hand();
+    Label score= new Label("Player score: "+game.getScore());
 	
-
+	
 	public void setup() {
 
 		size(600, 600);
@@ -86,40 +86,39 @@ public class Thing extends PApplet {
 	}
 
 	public void draw() {
-		
-	//	Button round=new Button("Round:   "+game.getRound());
-	//	round.setLocation(500,50);
-	//	round.setBounds(500, 50,80, 50);
-	//	round.setVisible(true);
-	//	Color red=new Color(250,0,0);
-	//	Color d=new Color(0,250,0);
-	//	round.setBackground(red);
-		
-	//	Button score = new Button("Score:   "+game.getScore());
+	    final Label round=new Label("Round:   "+game.getRound());
+	    round.setLocation(500,50);
+	    round.setBounds(500, 50,100, 50);
+	    round.setVisible(true);
+	    Color red=new Color(250,0,0);
+	    Color d=new Color(0,250,0);
+	    round.setBackground(red);
 		background(background);
-		Button beep = new Button("DEAL");
-		Button beep1 = new Button("HIT");
-		Button beep2 = new Button("STAND");
-	//	score.setLocation(500, 100);
-	//	score.setBounds(500, 100, 100, 50);
-	//	score.setVisible(true);
-	//	this.add(score);
-		beep.setLocation(400, 500);
-		beep.setBounds(400, 500, 100, 50);
-		beep.setVisible(true);
-	//	score.setBackground(d);
-	//	this.add(round);
+		Button deal = new Button("DEAL");
+		Button hit = new Button("HIT");
+		Button stand = new Button("STAND");
+		score.setLocation(500, 100);
+		score.setBounds(500, 100, 100, 50);
+		score.setVisible(true);
+		this.add(score);
+		deal.setLocation(400, 500);
+		deal.setBounds(400, 500, 100, 50);
+		deal.setVisible(true);
+		score.setBackground(d);
+		this.add(round);
 
 		/*
 		 * Deal button oop singleton :D we want the deal button to act one time
 		 * so we change his value to be 1
 		 */
-		beep.addMouseListener(new MouseAdapter() {
+		deal.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				round.setText("Round:   "+game.getRound());
 				if (flag == 0) {
 					flag = 1;
 					check = 0;
+					
 				} else if ((flag1 == 0) && (flag2 == 0))
 					return;
 				else {
@@ -133,18 +132,18 @@ public class Thing extends PApplet {
 			}
 		});
 
-		this.add(beep);
+		this.add(deal);
 
-		beep1.setLocation(400, 500);
-		beep1.setBounds(200, 500, 100, 50);
-		beep1.setVisible(true);
+		hit.setLocation(400, 500);
+		hit.setBounds(200, 500, 100, 50);
+		hit.setVisible(true);
 		/*
 		 * HIT Button we claimed that the player will have no more than 4 cards
 		 * in his hand before he exceed the 21 and we added the flags from the
 		 * deal button and the stand to make the button disabled after stand and
 		 * enable after deal
 		 */
-		beep1.addMouseListener(new MouseAdapter() {
+		hit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (game.getPlayerHand().getSum() > 21)
@@ -178,9 +177,9 @@ public class Thing extends PApplet {
 				}
 			}
 		});
-		beep2.setLocation(400, 500);
-		beep2.setBounds(300, 500, 100, 50);
-		beep2.setVisible(true);
+		stand.setLocation(400, 500);
+		stand.setBounds(300, 500, 100, 50);
+		stand.setVisible(true);
 		/**
 		 * Stand button function call the stand function and check how many
 		 * cards the dealer have and fill the cards
@@ -188,7 +187,7 @@ public class Thing extends PApplet {
 		 * 
 		 * */
 
-		beep2.addMouseListener(new MouseAdapter() {
+		stand.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (flag == 0)
@@ -206,6 +205,7 @@ public class Thing extends PApplet {
 					dealercards = dealerhand.getCards();
 					if (dealercards.size() == 2) {
 						checkstand();
+						flag2=2;
 
 					}
 					if (dealercards.size() == 3) {
@@ -243,12 +243,12 @@ public class Thing extends PApplet {
 
 			}
 		});
-		this.add(beep2);
+		this.add(stand);
 
 		if (flag == 1) {
-			this.remove(beep);
+			this.remove(deal);
 		}
-		this.add(beep1);
+		this.add(hit);
 
 		image(deck2, 440, 280);
 
@@ -317,7 +317,8 @@ public class Thing extends PApplet {
 
 		}
 		if (flag2 == 2) {
-
+			dcard1 = loadImage(getimg(dcards[1] + ".png"));
+			dcard1.resize(80, 120);
 			image(dcard1, 250, y);
 			image(dcard4, 250 + 18, y);
 
@@ -344,7 +345,6 @@ public class Thing extends PApplet {
 			image(dcard7, 250 + 72, y);
 
 		}
-
 	}
 
 	public String getimg(String x) {
@@ -353,13 +353,6 @@ public class Thing extends PApplet {
 		ImageIcon icon = new ImageIcon(imgUrl);
 
 		return icon.toString();
-		/*
-		 * URL imgUrl =
-		 * getClass().getClassLoader().getResource("pics/"+"Table.png");
-		 * ImageIcon icon = new ImageIcon(imgUrl); background =
-		 * loadImage(icon.toString());
-		 */
-
 	}
 
 	public void reset() {
@@ -417,9 +410,12 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**BlackJack** \n   You win!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("p");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
 				flag2 = 2;
-			
+
 			}
 			return;
 
@@ -431,9 +427,12 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**BlackJack** \n   Delaer win!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("d");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
 				flag2 = 2;
-			
+
 				return;
 			}
 		}
@@ -449,9 +448,12 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**BlackJack** \n   You win!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("p");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
 				flag2 = 2;
-			
+
 				return;
 			}
 		}
@@ -463,9 +465,12 @@ public class Thing extends PApplet {
 
 				JOptionPane.showMessageDialog(null,
 						"**Busted** \n   You Loose!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("d");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
 				flag2 = 2;
-				
+
 				return;
 			}
 		}
@@ -482,8 +487,11 @@ public class Thing extends PApplet {
 
 				JOptionPane.showMessageDialog(null,
 						"**Dealer Busted** \n   You win!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("p");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
-				
+
 				return;
 			}
 		}
@@ -496,8 +504,11 @@ public class Thing extends PApplet {
 
 				JOptionPane.showMessageDialog(null,
 						"**Bad luck** \n   Delaer win!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("d");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
-				
+
 				return;
 			}
 		}
@@ -508,8 +519,11 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**congratulations** \n   you win!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("p");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
-				
+
 				return;
 			}
 		}
@@ -520,8 +534,24 @@ public class Thing extends PApplet {
 			else {
 				JOptionPane.showMessageDialog(null,
 						"**unlucky** \n  ! ! Draw The dealer win !!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("d");
+				score.setText("Player score: "+game.getScore());
 				check = 1;
-				
+
+				return;
+			}
+		}
+		if (game.getDealerHand().getSum() == 21) {
+			if (check == 1)
+				return;
+			else {
+				JOptionPane.showMessageDialog(null,
+						"**BlackJack** \n   Delaer win!");
+				game.setValue(game.getPlayerHand().getSum());
+				game.calculateScore("d");
+				score.setText("Player score: "+game.getScore());
+				check = 1;
 				return;
 			}
 		}
